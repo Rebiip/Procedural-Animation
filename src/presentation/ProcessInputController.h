@@ -1,13 +1,15 @@
 #pragma once
 #include "./dtos/MouseClickEvent.h"
-#include "../application/dtos/Scene.h"
+#include "../application/ports/ApplicationController.h"
+
 class ProcessInputController {
 public:
-    explicit ProcessInputController(Scene &scene);
+    explicit ProcessInputController(ApplicationController &applicationController);
 
     void onMouseClick(MouseClickEvent event) const;
+
     void onButtonClick(int button) const;
 
 private:
-    Scene &scene_;
+    ApplicationController &applicationController_;
 };

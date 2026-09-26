@@ -4,8 +4,21 @@
 #include <GLFW/glfw3.h>
 #include "../../presentation/dtos/MouseButton.h"
 
-GlfwInputAdapter::GlfwInputAdapter(ProcessInputController &processInputController) : controller_(
-    processInputController) {
+GlfwInputAdapter::GlfwInputAdapter(Window &window, ProcessInputController &processInputController)
+    : window_(window), controller_(processInputController) {
+    window_.setMouseButtonCallback(
+        [this](Window *source, int button, int action, int mods) {
+            mouseCallback(source, button, action, mods);
+        });
+    window_.setKeyboardButtonCallback(
+        [this](Window *source, int key, int scancode, int action, int mods) {
+            keyboardCallback(source, key, scancode, action, mods);
+        });
+}
+
+GlfwInputAdapter::~GlfwInputAdapter() {
+    window_.setMouseButtonCallback({});
+    window_.setKeyboardButtonCallback({});
 }
 
 void GlfwInputAdapter::keyboardCallback(Window *window, const int key, int scancode, const int action, const int mods) const{

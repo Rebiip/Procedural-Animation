@@ -25,6 +25,7 @@ public:
     [[nodiscard]] std::vector<float> getBackHalfCircleVertices() const;
 
     [[nodiscard]] float getAnchorRadius() const;
+    [[nodiscard]] float getRadius() const { return radius_; }
     [[nodiscard]] float getRestrictionAngle() const { return restrictionAngle_; }
     [[nodiscard]] glm::vec3 getDestination() const { return glm::vec3(destination_, 0.0f); }
 

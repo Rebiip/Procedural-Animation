@@ -1,5 +1,7 @@
 #include "TransformPointsToSnake.h"
 
+#include <algorithm>
+
 #include "../../domain/entities/Joint.h"
 #include "../../domain/entities/Snake.h"
 

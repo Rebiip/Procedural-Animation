@@ -5,16 +5,19 @@ find_package(OpenGL REQUIRED)
 find_package(glad)
 find_package(glm)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(procedural_animation main.cpp
+        src/application/SceneController.cpp
+        src/application/SceneController.h
         src/application/ports/Renderer.h
         src/infrastructure/opengl/OpenGlRenderer.cpp
         src/infrastructure/opengl/OpenGlRenderer.h
         src/domain/entities/Renderable.h
         src/domain/entities/Camera.h
         src/domain/entities/Window.h
-        src/infrastructure/opengl/OpenGlWIndow.cpp
+        src/infrastructure/opengl/OpenGlWindow.cpp
         src/infrastructure/opengl/OpenGlWindow.h
         src/infrastructure/opengl/shaders/Shader.cpp
         src/presentation/ProcessInputController.cpp
@@ -29,8 +32,8 @@ add_executable(procedural_animation main.cpp
         src/domain/entities/Joint.h
         src/application/dtos/Scene.h
         src/application/ports/ApplicationController.h
-        src/infrastructure/opengl/OpenGlApplicationController.cpp
-        src/infrastructure/opengl/OpenGlApplicationController.h
+        src/infrastructure/opengl/OpenGlApplication.cpp
+        src/infrastructure/opengl/OpenGlApplication.h
         src/application/use_cases/UpdateScene.cpp
         src/application/use_cases/UpdateScene.h
         src/application/use_cases/MoveHeadPoint.cpp

@@ -1,13 +1,22 @@
+#include "src/application/SceneController.h"
+#include "src/infrastructure/opengl/GlfwInputAdapter.h"
+#include "src/infrastructure/opengl/OpenGlApplication.h"
 #include "src/infrastructure/opengl/OpenGlRenderer.h"
 #include "src/infrastructure/opengl/OpenGlWindow.h"
-#include "src/application/dtos/Scene.h"
-#include "src/infrastructure/opengl/OpenGlApplicationController.h"
+#include "src/presentation/ProcessInputController.h"
 
 int main() {
-    OpenGlWindow window(720, 480, "Procedural Learning");
     Scene scene;
-    const auto processInputController = ProcessInputController(scene);
-    OpenGlApplicationController controller(window, processInputController);
-    controller.run(scene);
+    SceneController sceneController(scene);
+    ProcessInputController inputController(sceneController);
+
+    OpenGlWindow window(720, 480, "Procedural Learning");
+    window.create();
+    window.initializeDefaults();
+
+    OpenGlRenderer renderer(window);
+    GlfwInputAdapter inputAdapter(window, inputController);
+    const OpenGlApplication application(window, renderer);
+    application.run(scene);
     return 0;
 }

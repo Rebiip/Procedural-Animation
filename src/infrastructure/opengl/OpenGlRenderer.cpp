@@ -1,4 +1,5 @@
 #include "OpenGlRenderer.h"
+#include "../../domain/entities/Snake.h"
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
@@ -7,8 +8,7 @@
 #include <stdexcept>
 
 
-OpenGlRenderer::OpenGlRenderer(Window &window, ProcessInputController &processInputController) : window_(window),
-    inputAdapter_(processInputController) {
+OpenGlRenderer::OpenGlRenderer(Window &window) : window_(window) {
     init();
     shader_ = std::make_unique<Shader>(SHADER_DIRECTORY "/object.shader.vs",
                                        SHADER_DIRECTORY "/object.shader.fs");
@@ -27,7 +27,6 @@ OpenGlRenderer::OpenGlRenderer(Window &window, ProcessInputController &processIn
 }
 
 OpenGlRenderer::~OpenGlRenderer() {
-    window_.setMouseButtonCallback({});
     glDeleteBuffers(1, &vertexBuffer_);
     glDeleteVertexArrays(1, &vertexArray_);
     glDeleteBuffers(1, &indexBuffer_);
@@ -73,6 +72,11 @@ void OpenGlRenderer::render(const Renderable &renderable) {
     shader_->setMat4("model", glm::translate(glm::mat4(1.0f), renderable.getTranslation()));
     shader_->setVec3("objectColor", renderable.getColor());
     draw(renderable);
+    if (const auto *snake = dynamic_cast<const Snake *>(&renderable)) {
+        for (const auto &eye: snake->getEyes()) {
+            render(eye);
+        }
+    }
 }
 
 void OpenGlRenderer::endFrame() {
@@ -80,24 +84,11 @@ void OpenGlRenderer::endFrame() {
 }
 
 void OpenGlRenderer::init() const {
-    window_.create();
     gladInit();
-    window_.initializeDefaults();
-    window_.setMouseButtonCallback(
-        [this](Window *window, const int button, const int action, const int mods) {
-            inputAdapter_.mouseCallback(window, button, action, mods);
-        }
-    );
-    window_.setKeyboardButtonCallback(
-        [this](Window *window, const int key, const int scancode, const int action, const int mods) {
-            inputAdapter_.keyboardCallback(window, key, scancode, action, mods);
-        }
-    );
 }
 
 void OpenGlRenderer::gladInit() const {
     if (!gladLoadGL(glfwGetProcAddress)) {
-        window_.destroy();
         throw std::invalid_argument("OpenGL functions could not be loaded");
     }
     glEnable(GL_DEPTH_TEST);

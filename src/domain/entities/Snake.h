@@ -10,8 +10,7 @@ class Snake : public Renderable {
 public:
     Snake() = default;
 
-    explicit Snake(std::vector<Joint> circles) : joints_(std::move(circles)) {
-    }
+    explicit Snake(std::vector<Joint> circles);
 
     [[nodiscard]] const std::vector<float> &getVertices() const override { return vertices_; }
     [[nodiscard]] glm::vec3 getColor() const override { return glm::vec3(0.0f); }
@@ -32,11 +31,16 @@ public:
 
     void update(float delta_time);
 
+    [[nodiscard]] const std::vector<Joint> &getEyes() const { return eyes_; }
+
 private:
     std::vector<Joint> joints_{};
+    std::vector<Joint> eyes_{};
     mutable std::vector<float> vertices_{};
-    std::vector<int> indices_{};
+    mutable std::vector<int> indices_{};
+
+    void generateEyes();
 
 
-    [[nodiscard]] std::vector<float> getJointsConnectedByLine() const;
+    [[nodiscard]] std::tuple<std::vector<float>, std::vector<int> > getJointsConnectedByLine() const;
 };

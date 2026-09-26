@@ -1,6 +1,5 @@
 #include "Joint.h"
 
-#include <iostream>
 #include <glm/glm.hpp>
 
 Joint::Joint(const float radius, const float anchorRadius, const float restrictionAngle, const glm::vec3 color,
@@ -61,7 +60,7 @@ void Joint::setDestination(const int x_pos, const int y_pos) {
 
 std::vector<float> Joint::getHalfFrontJointVertices() const {
     std::vector<float> frontHalfVertices;
-    for (int i = 0; i <= 18; ++i) {
+    for (int i = 18; i >= 0; --i) {
         const float angle = glm::radians(static_cast<float>(i) * 10.0f);
         frontHalfVertices.push_back(radius_ * cos(angle));
         frontHalfVertices.push_back(radius_ * sin(angle));
@@ -71,7 +70,7 @@ std::vector<float> Joint::getHalfFrontJointVertices() const {
 
 std::vector<float> Joint::getBackHalfCircleVertices() const {
     std::vector<float> backHalfVertices;
-    for (int i = 18; i <= 36; ++i) {
+    for (int i = 36; i >= 18; --i) {
         const float angle = glm::radians(static_cast<float>(i) * 10.0f);
         backHalfVertices.push_back(radius_ * cos(angle));
         backHalfVertices.push_back(radius_ * sin(angle));

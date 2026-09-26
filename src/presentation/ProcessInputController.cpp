@@ -1,26 +1,24 @@
 #include "ProcessInputController.h"
 
-#include <ostream>
+#include <iostream>
 
 #include "./dtos/MouseButton.h"
 
-#include "../application/use_cases/CreatePoint.h"
-#include "../application/use_cases/MoveHeadPoint.h"
-#include "../application/use_cases/TransformPointsToSnake.h"
-
-ProcessInputController::ProcessInputController(Scene &scene) : scene_(scene) {
+ProcessInputController::ProcessInputController(ApplicationController &applicationController)
+    : applicationController_(applicationController) {
 }
 
 void ProcessInputController::onMouseClick(const MouseClickEvent event) const {
     if (event.button == MouseButton::Left) {
-        scene_.renderables.push_back(CreatePoint::execute(static_cast<int>(event.x), static_cast<int>(event.y)));
+        applicationController_.addPoint(static_cast<int>(event.x), static_cast<int>(event.y));
     } else if (event.button == MouseButton::Right) {
-        MoveHeadPoint::execute(scene_.renderables, static_cast<int>(event.x), static_cast<int>(event.y));
+        applicationController_.moveHeadPoint(static_cast<int>(event.x), static_cast<int>(event.y));
     }
 }
 
 void ProcessInputController::onButtonClick(const int button) const {
+    std::cout << "Button clicked: " << button << std::endl;
     if (button == 83) {
-        TransformPointsToSnake::execute(scene_.renderables);
+        applicationController_.transformPointsToSnake();
     }
 }
