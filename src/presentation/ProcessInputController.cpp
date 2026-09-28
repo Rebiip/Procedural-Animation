@@ -22,11 +22,13 @@ void ProcessInputController::onButtonClick(const int button) const {
         applicationController_.transformPointsToSnake();
     } else if (button == 61) {
         applicationController_.increasePointRadius();
-    } else if (button == 59) {
+    } else if (button == 45) {
         applicationController_.decreasePointRadius();
     } else if (button == 46) {
         applicationController_.increaseJointDistanceConstraint();
     } else if (button == 44) {
         applicationController_.decreaseJointDistanceConstraint();
+    } else if (button == 82) {
+        applicationController_.resetApplication();
     }
 }

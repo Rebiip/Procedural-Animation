@@ -13,4 +13,6 @@ public:
     virtual void decreasePointRadius() = 0;
 
     virtual void decreaseJointDistanceConstraint() = 0;
+
+    virtual void resetApplication() = 0;
 };

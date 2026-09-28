@@ -55,8 +55,8 @@ add_executable(procedural_animation main.cpp
 target_link_libraries(procedural_animation glad::glad glfw opengl::opengl glm Freetype::Freetype)
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/shaders")
-foreach(shader object.shader.vs object.shader.fs)
+foreach (shader object.shader.vs object.shader.fs text.shader.vs text.shader.fs)
     configure_file("src/infrastructure/opengl/shaders/${shader}" "shaders/${shader}" COPYONLY)
-endforeach()
+endforeach ()
 target_compile_definitions(procedural_animation PRIVATE
         SHADER_DIRECTORY="${CMAKE_CURRENT_BINARY_DIR}/shaders")

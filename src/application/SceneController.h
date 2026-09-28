@@ -22,8 +22,8 @@ public:
 
     void decreaseJointDistanceConstraint() override;
 
+    void resetApplication() override;
+
 private:
     Scene &scene_;
-    float pointRadius_ = 15.0f;
-    float jointDistanceConstraint_ = 10.0f;
 };
