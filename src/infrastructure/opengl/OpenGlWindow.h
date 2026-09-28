@@ -45,4 +45,5 @@ private:
     static void glfwMouseButtonDispatcher(GLFWwindow *, int button, int action, int mods);
 
     static void glfwKeyboardCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+
 };

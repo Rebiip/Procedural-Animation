@@ -7,7 +7,7 @@ SceneController::SceneController(Scene &scene) : scene_(scene) {
 }
 
 void SceneController::addPoint(const int x, const int y) {
-    scene_.renderables.push_back(CreatePoint::execute(x, y, pointRadius_));
+    scene_.renderables.push_back(CreatePoint::execute(x, y, pointRadius_, jointDistanceConstraint_));
 }
 
 void SceneController::moveHeadPoint(const int x, const int y) {
@@ -20,4 +20,17 @@ void SceneController::transformPointsToSnake() {
 
 void SceneController::increasePointRadius() {
     pointRadius_ += 5.0f;
+}
+
+void SceneController::decreasePointRadius() {
+    pointRadius_ -= 5.0f;
+}
+
+
+void SceneController::increaseJointDistanceConstraint() {
+    jointDistanceConstraint_ += 5.0f;
+}
+
+void SceneController::decreaseJointDistanceConstraint() {
+    jointDistanceConstraint_ -= 5.0f;
 }

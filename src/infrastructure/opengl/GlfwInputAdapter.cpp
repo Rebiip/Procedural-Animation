@@ -21,7 +21,8 @@ GlfwInputAdapter::~GlfwInputAdapter() {
     window_.setKeyboardButtonCallback({});
 }
 
-void GlfwInputAdapter::keyboardCallback(Window *window, const int key, int scancode, const int action, const int mods) const{
+void GlfwInputAdapter::keyboardCallback(Window *window, const int key, int scancode, const int action,
+                                        const int mods) const {
     if (action != GLFW_PRESS) {
         return;
     }

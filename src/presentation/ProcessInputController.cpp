@@ -20,5 +20,13 @@ void ProcessInputController::onButtonClick(const int button) const {
     std::cout << "Button clicked: " << button << std::endl;
     if (button == 83) {
         applicationController_.transformPointsToSnake();
+    } else if (button == 61) {
+        applicationController_.increasePointRadius();
+    } else if (button == 59) {
+        applicationController_.decreasePointRadius();
+    } else if (button == 46) {
+        applicationController_.increaseJointDistanceConstraint();
+    } else if (button == 44) {
+        applicationController_.decreaseJointDistanceConstraint();
     }
 }

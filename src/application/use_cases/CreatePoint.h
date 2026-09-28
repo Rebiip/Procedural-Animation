@@ -4,6 +4,6 @@
 class CreatePoint {
 
 public:
-    static std::unique_ptr<Renderable> execute(int xPos, int yPos, float radius);
+    static std::unique_ptr<Renderable> execute(int xPos, int yPos, float radius, float jointAnchorRadius);
 };
 

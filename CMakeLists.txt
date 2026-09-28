@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 project(procedural_animation)
+find_package(freetype)
 find_package(glfw3)
 find_package(OpenGL REQUIRED)
 find_package(glad)
@@ -48,9 +49,10 @@ add_executable(procedural_animation main.cpp
         src/application/use_cases/TranslateJointsUseCase.h
         src/domain/policies/DistanceConstraintPolicy.cpp
         src/domain/policies/DistanceConstraintPolicy.h
+        src/domain/entities/Character.h
 )
 
-target_link_libraries(procedural_animation glad::glad glfw opengl::opengl glm)
+target_link_libraries(procedural_animation glad::glad glfw opengl::opengl glm Freetype::Freetype)
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 foreach(shader object.shader.vs object.shader.fs)

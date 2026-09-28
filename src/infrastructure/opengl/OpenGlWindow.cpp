@@ -1,6 +1,9 @@
 #include "OpenGlWindow.h"
+
 #include <stdexcept>
 #include "GLFW/glfw3.h"
+
+#include <ft2build.h>
 
 
 OpenGlWindow::OpenGlWindow(const int width, const int height, const char *title) {
@@ -31,6 +34,7 @@ void OpenGlWindow::create() {
     glfwSetWindowUserPointer(windowHandle_, this);
     glfwMakeContextCurrent(windowHandle_);
     glfwSwapInterval(1);
+
 }
 
 void OpenGlWindow::destroy() {
@@ -42,7 +46,7 @@ void OpenGlWindow::destroy() {
 }
 
 OpenGlWindow::~OpenGlWindow() {
-    destroy();
+    OpenGlWindow::destroy();
 }
 
 void OpenGlWindow::getSize(int *width, int *height) {
@@ -95,7 +99,8 @@ void OpenGlWindow::glfwMouseButtonDispatcher(GLFWwindow *window, const int butto
     }
 }
 
-void OpenGlWindow::glfwKeyboardCallback(GLFWwindow *window, const int key, const int scancode, const int action, const int mods) {
+void OpenGlWindow::glfwKeyboardCallback(GLFWwindow *window, const int key, const int scancode, const int action,
+                                        const int mods) {
     auto *instance =
             static_cast<OpenGlWindow *>(glfwGetWindowUserPointer(window));
     if (instance && instance->keyboardCallback_) {
