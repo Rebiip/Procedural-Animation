@@ -30,5 +30,9 @@ void ProcessInputController::onButtonClick(const int button) const {
         applicationController_.decreaseJointDistanceConstraint();
     } else if (button == 82) {
         applicationController_.resetApplication();
+    } else if (button == 81) {
+        applicationController_.increaseMaxAngleConstraint();
+    } else if (button == 87) {
+        applicationController_.decreaseMaxAngleConstraint();
     }
 }

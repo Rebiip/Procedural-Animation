@@ -24,6 +24,10 @@ public:
 
     void resetApplication() override;
 
+    void increaseMaxAngleConstraint() override;
+
+    void decreaseMaxAngleConstraint() override;
+
 private:
     Scene &scene_;
 };

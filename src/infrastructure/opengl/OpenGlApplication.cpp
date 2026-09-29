@@ -22,6 +22,8 @@ void OpenGlApplication::run(const Scene &scene) const {
                              glm::vec3(0.0f, 0.0f, 0.0f));
         renderer_.renderText("Joint Distance Constraint: " + std::to_string(scene.jointDistanceConstraintSize), 10.0f,
                              30.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
+        renderer_.renderText("Max Angle Constraint: " + std::to_string(scene.maxAngleConstraint), 10.0f,
+                             50.0f, 0.5f, glm::vec3(0.0f, 0.0f, 0.0f));
         renderer_.endFrame();
         glfwPollEvents();
         const auto currentTime = glfwGetTime();
